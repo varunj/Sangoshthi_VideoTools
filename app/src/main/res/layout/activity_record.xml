@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="in.deepaksood.videocutntrim.activities.RecordActivity">
+    tools:context="io.github.varunj.sangoshthi_videotools.activities.RecordActivity">
 
     <Button
         android:id="@+id/btn_record"

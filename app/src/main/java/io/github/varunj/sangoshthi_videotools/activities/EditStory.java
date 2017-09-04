@@ -1,4 +1,4 @@
-package in.deepaksood.videocutntrim.activities;
+package io.github.varunj.sangoshthi_videotools.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -23,14 +23,14 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunnin
 import java.io.File;
 import java.util.Arrays;
 
-import in.deepaksood.videocutntrim.R;
-import in.deepaksood.videocutntrim.utils.CommonUtils;
-import in.deepaksood.videocutntrim.utils.Constants;
+import io.github.varunj.sangoshthi_videotools.R;
+import io.github.varunj.sangoshthi_videotools.utils.CommonUtils;
+import io.github.varunj.sangoshthi_videotools.utils.Constants;
 
 /**
  * EditStory where all the processing is happening
  * Layout - activity_edit_storydit_story.xml
- * @author deepak
+ * @author Varun
  */
 public class EditStory extends AppCompatActivity {
 
@@ -206,8 +206,6 @@ public class EditStory extends AppCompatActivity {
                 tvEndTime.setText(convertTime(rightPinIndex));
             }
         });
-
-
     }
 
     public String convertTime(int videoDurationSeconds) {

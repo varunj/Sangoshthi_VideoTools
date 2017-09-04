@@ -1,4 +1,4 @@
-package in.deepaksood.videocutntrim.activities;
+package io.github.varunj.sangoshthi_videotools.activities;
 
 import android.Manifest;
 import android.content.Intent;
@@ -13,9 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import in.deepaksood.videocutntrim.R;
-import in.deepaksood.videocutntrim.utils.CommonUtils;
-import in.deepaksood.videocutntrim.utils.Constants;
+import io.github.varunj.sangoshthi_videotools.R;
+import io.github.varunj.sangoshthi_videotools.utils.CommonUtils;
+import io.github.varunj.sangoshthi_videotools.utils.Constants;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

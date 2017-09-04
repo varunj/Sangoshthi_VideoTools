@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="in.deepaksood.videocutntrim.activities.CreateStory">
+    tools:context="io.github.varunj.sangoshthi_videotools.activities.CreateStory">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_timeline_video"

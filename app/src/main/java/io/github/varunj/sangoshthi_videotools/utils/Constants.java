@@ -1,9 +1,9 @@
-package in.deepaksood.videocutntrim.utils;
+package io.github.varunj.sangoshthi_videotools.utils;
 
 import java.util.ArrayList;
 
 /**
- * Created by Deepak on 23-04-2017.
+ * Created by Varun on 23-04-2017.
  */
 
 public class Constants {

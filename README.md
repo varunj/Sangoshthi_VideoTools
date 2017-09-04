@@ -1,34 +1,27 @@
-# VideoCutNTrim
-A Project for Community workers for trimming and joining videos using mobile device easily.
+# Sangoshthi_VideoTools
+Android application for project Sangoshthi. To be used for Video Editing and Content Creation
 
-[Download apk here](https://github.com/deepak15013/VideoCutNTrim/raw/master/apk/app-debug.apk)
 
-### Screenshots
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_1.jpeg "Main Screen")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_2.jpeg "Create Story")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_3.jpeg "Image/Video selection")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_4.jpeg "Create Story Timeline")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_5.jpeg "Audio added")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_6.jpeg "New Frame added")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_7.jpeg "Timeline")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_8.jpeg "Timeline")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_9.jpeg "Timeline")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_10.jpeg "Create Story pressed")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_11.jpeg "Processing")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_12.jpeg "Timeline")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_13.jpeg "Create Story processing finished")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_14.jpeg "Play story")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_15.jpeg "Video Player")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_16.jpeg "Video Player")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_17.jpeg "Audio Record")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_18.jpeg "Play audio recorded")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_19.jpeg "Edit Story")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_20.jpeg "Story/Video selection")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_21.jpeg "Opened Story")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_22.jpeg "Video Player Controls")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_23.jpeg "Video Seek bar for cutting")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_24.jpeg "Seekbar selection")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_25.jpeg "Seekbar Selection")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_26.jpeg "Cutting File")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_27.jpeg "Opened new cropped file")
-![alt text](https://github.com/deepak15013/VideoCutNTrim/blob/master/Screenshots/Screenshot_28.jpeg "Playing new cropped file")
+### FFmpeg Commands
+ffmpeg -ss 5 -i a.mp4 -t 5 -codec copy temp_a.mp4
+
+ffmpeg -ss 10 -i b.mp4 -t 10 -codec copy temp_b.mp4
+
+echo "file 'temp_a.mp4'" > concat.txt
+
+echo "file 'temp_b.mp4'" >> concat.txt
+
+ffmpeg -f concat -i concat.txt -codec copy output.mp4
+
+rm temp_a.mp4
+
+rm temp_b.mp4
+
+rm concat.txt
+
+
+### To Discuss
+
+insync: paid 30usd
+grive2: manual
+overgrive: paid 5usd

@@ -1,4 +1,4 @@
-package in.deepaksood.videocutntrim.utils;
+package io.github.varunj.sangoshthi_videotools.utils;
 
 import android.app.Activity;
 import android.content.ContentUris;
@@ -28,7 +28,7 @@ import java.util.Locale;
  * This is a Singleton Pattern and this will only be initialized once
  * use @method getInstance() to get the instance for this class
  * This is thread safe Lazy initialization singleton class
- * Created by deepak on 16-03-2017.
+ * Created by Varun on 16-03-2017.
  */
 
 public class CommonUtils {

@@ -1,4 +1,4 @@
-package in.deepaksood.videocutntrim.utils;
+package io.github.varunj.sangoshthi_videotools.utils;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +12,11 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import in.deepaksood.videocutntrim.R;
-import in.deepaksood.videocutntrim.activities.CreateStory;
+import io.github.varunj.sangoshthi_videotools.R;
+import io.github.varunj.sangoshthi_videotools.activities.CreateStory;
 
 /**
- * Created by Deepak on 22-04-2017.
+ * Created by Varun on 22-04-2017.
  */
 
 public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecyclerViewAdapter.MyViewHolder> {

@@ -1,4 +1,4 @@
-package in.deepaksood.videocutntrim.activities;
+package io.github.varunj.sangoshthi_videotools.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +12,9 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
-import in.deepaksood.videocutntrim.R;
-import in.deepaksood.videocutntrim.utils.CommonUtils;
-import in.deepaksood.videocutntrim.utils.Constants;
+import io.github.varunj.sangoshthi_videotools.R;
+import io.github.varunj.sangoshthi_videotools.utils.CommonUtils;
+import io.github.varunj.sangoshthi_videotools.utils.Constants;
 
 public class RecordActivity extends AppCompatActivity implements View.OnClickListener {
 

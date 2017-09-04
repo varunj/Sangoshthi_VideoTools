@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VideoCutNTrim.iml" filepath="$PROJECT_DIR$/VideoCutNTrim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sangoshthi_VideoTools.iml" filepath="$PROJECT_DIR$/Sangoshthi_VideoTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -1,4 +1,4 @@
-package in.deepaksood.videocutntrim.activities;
+package io.github.varunj.sangoshthi_videotools.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -20,11 +20,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import in.deepaksood.videocutntrim.R;
-import in.deepaksood.videocutntrim.utils.AudioRecyclerViewAdapter;
-import in.deepaksood.videocutntrim.utils.CommonUtils;
-import in.deepaksood.videocutntrim.utils.Constants;
-import in.deepaksood.videocutntrim.utils.VideoRecyclerViewAdapter;
+import io.github.varunj.sangoshthi_videotools.R;
+import io.github.varunj.sangoshthi_videotools.utils.AudioRecyclerViewAdapter;
+import io.github.varunj.sangoshthi_videotools.utils.CommonUtils;
+import io.github.varunj.sangoshthi_videotools.utils.Constants;
+import io.github.varunj.sangoshthi_videotools.utils.VideoRecyclerViewAdapter;
 
 public class CreateStory extends AppCompatActivity implements View.OnClickListener {
 
