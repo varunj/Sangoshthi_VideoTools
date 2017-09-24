@@ -22,6 +22,3 @@ rm concat.txt
 
 ### To Discuss
 
-insync: paid 30usd
-grive2: manual
-overgrive: paid 5usd

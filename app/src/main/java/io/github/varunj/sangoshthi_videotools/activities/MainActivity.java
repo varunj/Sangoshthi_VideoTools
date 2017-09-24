@@ -1,6 +1,7 @@
 package io.github.varunj.sangoshthi_videotools.activities;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
