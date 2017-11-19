@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#009688</color>
 
     <!-- Custom Colors -->
+    <color name="home_button1">#ff99cc00</color>
+    <color name="home_button2">#ff33b5e5</color>
+
+
+
     <color name="rangeBarColor">#3F51B5</color>
     <color name="tickColor">#3F51B5</color>
     <color name="connectingLineColor">#FF0000</color>
@@ -13,4 +18,14 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorButton">#311B92</color>
+
+    <color name="picker_add_photo">#ffffff</color>
+
+    <color name="picker_participate">#ffff4444</color>
+
+    <color name="colorBlack">#000000</color>
+
+    <color name="play_button">#F44336</color>
+
+
 </resources>

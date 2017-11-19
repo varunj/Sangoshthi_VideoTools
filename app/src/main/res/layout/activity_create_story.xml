@@ -10,6 +10,7 @@
     tools:context="io.github.varunj.sangoshthi_videotools.activities.CreateStory">
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="60dp"
         android:id="@+id/rv_timeline_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +27,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="60dp"
         android:orientation="horizontal">
 
         <Button
@@ -65,27 +66,6 @@
             android:textStyle="bold"
             android:layout_margin="10dp"/>
 
-        <Button
-            android:id="@+id/btn_record_audio"
-            android:layout_width="130dp"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="@string/btn_record"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            android:layout_margin="10dp"/>
-
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_play_story"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/btn_story_play"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:layout_margin="10dp"
-        android:visibility="invisible"/>
 
 </LinearLayout>

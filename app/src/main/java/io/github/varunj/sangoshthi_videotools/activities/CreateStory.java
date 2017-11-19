@@ -42,8 +42,6 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
     private Button btnAddContainer;
     private Button btnDeleteContainer;
     private Button btnCreate;
-    private Button btnRecordAudio;
-    private Button btnPlayStory;
 
     // Uri for data
     private Uri uri;
@@ -74,8 +72,6 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
         btnAddContainer = (Button) findViewById(R.id.btn_add_container);
         btnDeleteContainer = (Button) findViewById(R.id.btn_delete_container);
         btnCreate = (Button) findViewById(R.id.btn_create);
-        btnRecordAudio = (Button) findViewById(R.id.btn_record_audio);
-        btnPlayStory = (Button) findViewById(R.id.btn_play_story);
 
         // this is for populating recycler view
         Constants.imageUriList.add("");
@@ -97,8 +93,6 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
         btnAddContainer.setOnClickListener(this);
         btnDeleteContainer.setOnClickListener(this);
         btnCreate.setOnClickListener(this);
-        btnRecordAudio.setOnClickListener(this);
-        btnPlayStory.setOnClickListener(this);
 
         /* initializing progress bar, used when ffmpeg commands are run */
         progressDialog = new ProgressDialog(this);
@@ -123,7 +117,6 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                 case Constants.VIDEO_READ_REQUEST_CODE:
                     if(data != null) {
                         uri = data.getData();
-
                         /* Set the data returned from the FileManager intent to the position requested */
                         Log.i(TAG, "Uri Video: " + uri.toString());
                         Constants.imageUriList.set(Constants.update_position, uri.toString());
@@ -154,66 +147,30 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_add_container:
-                Toast.makeText(this, "add", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Add Section", Toast.LENGTH_SHORT).show();
                 Constants.imageUriList.add("");
                 Constants.audioUriList.add("");
                 videoRecyclerViewAdapter.notifyItemInserted(Constants.imageUriList.size() - 1);
                 videoRecyclerView.getLayoutManager().scrollToPosition(Constants.imageUriList.size() - 1);
-
                 audioRecyclerViewAdapter.notifyItemInserted(Constants.audioUriList.size() -1);
                 audioRecyclerView.getLayoutManager().scrollToPosition(Constants.audioUriList.size() -1);
                 break;
 
             case R.id.btn_delete_container:
                 if(Constants.imageUriList.size() != 0) {
-                    Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Delete Section", Toast.LENGTH_SHORT).show();
                     Constants.imageUriList.remove(Constants.imageUriList.size() - 1);
                     Constants.audioUriList.remove(Constants.audioUriList.size() - 1);
                     videoRecyclerViewAdapter.notifyDataSetChanged();
                     audioRecyclerViewAdapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(this, "Timeline empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Timeline Empty", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.btn_create:
-                Toast.makeText(this, "create story", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Create Story", Toast.LENGTH_SHORT).show();
                 createStory();
-                break;
-
-            case R.id.btn_record_audio:
-                Toast.makeText(this, "Record audio clip", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, RecordActivity.class);
-                startActivity(intent);
-                break;
-
-            case R.id.btn_play_story:
-                if(videoCreated) {
-                    Toast.makeText(this, "Playing the created video story", Toast.LENGTH_SHORT).show();
-                    Intent intentCreateStory = new Intent(this, EditStory.class);
-                    intentCreateStory.putExtra(Constants.EDIT_STORY, false);
-                    intentCreateStory.putExtra(Constants.STORY_URI, Uri.parse(createdStoryPath).toString());
-                    startActivity(intentCreateStory);
-                } else {
-                    if(btnPlayStory.getText().equals(getResources().getString(R.string.btn_story_play))) {
-                        Toast.makeText(this, "Playing the created audio story", Toast.LENGTH_SHORT).show();
-                        if(createdStoryPath != null && !createdStoryPath.equals("")) {
-                            File file = new File(createdStoryPath);
-                            if(file.exists() && file.isFile()) {
-                                CommonUtils.getInstance().startAudioPlaying(Uri.parse(createdStoryPath).toString());
-                            } else {
-                                Toast.makeText(this, "Created story not found", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        btnPlayStory.setText(getResources().getString(R.string.btn_stop_story_play));
-                    } else if(btnPlayStory.getText().equals(getResources().getString(R.string.btn_stop_story_play))) {
-                        btnPlayStory.setText(getResources().getString(R.string.btn_story_play));
-                        CommonUtils.getInstance().stopAudioPlaying();
-                    } else {
-                        Toast.makeText(this, "Invalid state", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
                 break;
         }
     }
@@ -239,8 +196,6 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
 
         if(imageTimeline && audioTimeline) {
             max_num_of_commands = numOfFrames + 1;
-            Log.d(TAG, "Max Commands to execute: " + max_num_of_commands);
-
             intermediateFiles = new ArrayList<>();
 
             for(int i = 0; i < numOfFrames; i++) {
@@ -251,16 +206,27 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                         + i + ".ts";
                 intermediateFiles.add(intermediateFilePath);
 
-                String[] merge_command = {"-y", "-loop", "1",
-                        "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.imageUriList.get(i))),
-                        "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.audioUriList.get(i))),
-                        "-acodec", "aac",
-                        "-vcodec", "mpeg4",
-                        "-f", "mpegts",
-                        "-shortest", intermediateFilePath};
-                Log.d(TAG, "merge_command: " + Arrays.toString(merge_command));
+                if (!Constants.imageUriList.get(i).contains("mp4")) {
+                    String[] merge_command = {"-loop", "1", "-y",
+                            "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.imageUriList.get(i))),
+                            "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.audioUriList.get(i))),
+                            "-acodec", "aac",
+                            "-vcodec", "mpeg4",
+                            "-shortest", intermediateFilePath};
+                    Log.d(TAG, "xxxmerge_command: " + Arrays.toString(merge_command));
+                    execFFmpegBinary(merge_command);
+                }
+                else {
+                    String[] merge_command = {
+                            "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.imageUriList.get(i))),
+                            "-acodec", "aac",
+                            "-vcodec", "mpeg4",
+                            intermediateFilePath};
+                    Log.d(TAG, "xxxmerge_command: " + Arrays.toString(merge_command));
+                    execFFmpegBinary(merge_command);
+                }
 
-                execFFmpegBinary(merge_command);
+
             }
 
             String concat_command = "concat:";
@@ -276,20 +242,19 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                     + CommonUtils.getInstance().getTimeStamp()
                     + ".mp4";
 
-            String[] join_command = {"-y", "-i", concat_command,
+            String[] join_command = {"-i", concat_command,
                         "-c", "copy", "-bsf:a", "aac_adtstoasc", createdStoryPath};
 
             execFFmpegBinary(join_command);
 
-            Log.d(TAG, "join_command for video: " + Arrays.toString(join_command));
+            Log.d(TAG, "xxxjoin_command for video: " + Arrays.toString(join_command));
             videoCreated = true;
-        } else if(!imageTimeline && audioTimeline) {
-            // imageTimeline null and audioTimeline not null, create a merge audio mp3
-            Toast.makeText(this, "Creating merged audio file", Toast.LENGTH_SHORT).show();
+        }
 
+        // if all image/video timeline are null and audio timeline not null, merge all audios
+        else if(!imageTimeline && audioTimeline) {
+            Toast.makeText(this, "Merging Audio Files", Toast.LENGTH_SHORT).show();
             max_num_of_commands = 1;
-            Log.d(TAG, "Max Commands to execute: " + max_num_of_commands);
-
             String concat_command = "concat:";
             for(int i = 0; i < numOfFrames; i++) {
                 concat_command += CommonUtils.getInstance().getPath(this, Uri.parse(Constants.audioUriList.get(i)));
@@ -306,15 +271,17 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
             String[] join_command = {"-y", "-i", concat_command,
                     "-c", "copy", createdStoryPath};
 
-            Log.d(TAG, "join_command for audio: " + Arrays.toString(join_command));
+            Log.d(TAG, "xxxjoin_command for audio: " + Arrays.toString(join_command));
 
             videoCreated = false;
 
             execFFmpegBinary(join_command);
 
-        } else {
-            // both imageTimeline and audioTimeline null
-            Toast.makeText(this, "Please fill the images and audios, and delete rest", Toast.LENGTH_SHORT).show();
+        }
+
+        // both image/video timeline and audio timeline null
+        else {
+            Toast.makeText(this, "Please Fill", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -330,23 +297,23 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                 CommonUtils.getInstance().ffmpeg.execute(command, new ExecuteBinaryResponseHandler() {
                     @Override
                     public void onFailure(String s) {
-                        Log.d(TAG, "FAILED with output : " + s);
+                        Log.d(TAG, "xxxFAILED with output : " + s);
                         progressDialog.dismiss();
                     }
 
                     @Override
                     public void onSuccess(String s) {
-                        Log.d(TAG, "SUCCESS with output : " + s);
+                        Log.d(TAG, "xxxSUCCESS with output : " + s);
                     }
 
                     @Override
                     public void onProgress(String s) {
-                        Log.d(TAG, "progress : " + s);
+                        Log.d(TAG, "xxxprogress : " + s);
                     }
 
                     @Override
                     public void onStart() {
-                        Log.d(TAG, "Started command");
+                        Log.d(TAG, "xxxStarted command");
                         progressDialog.setMessage("Processing...");
                         progressDialog.show();
                     }
@@ -354,29 +321,28 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                     @Override
                     public void onFinish() {
                         num_of_commands_completed++;
-                        Log.d(TAG, "Finished command: " + num_of_commands_completed);
+                        Log.d(TAG, "xxxFinished command: " + num_of_commands_completed);
                         // progress dialog must be removed when all the commands are completed
                         if(num_of_commands_completed == max_num_of_commands) {
-                            Log.d(TAG, "All commands processed");
+                            Log.d(TAG, "xxxAll commands processed");
                             Toast.makeText(CreateStory.this, "Merged Successfully", Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
 
-                            btnPlayStory.setVisibility(View.VISIBLE);
-
                             if(videoCreated) {
                                 // All the intermediate file must be deleted, for next round of cutting only when video_story is created
-                                Log.d(TAG, "Deleting file in progress");
+                                Log.d(TAG, "xxxDeleting file in progress");
                                 for(int i = 0; i < intermediateFiles.size(); i++) {
                                     File file = new File(intermediateFiles.get(i));
                                     if(file.exists()) {
-                                        Log.d(TAG, "deleting intermediate files: "+file.delete());
+                                        Log.d(TAG, "xxxdeleting intermediate files: "+file.delete());
                                     }
                                 }
                             }
                             num_of_commands_completed = 0;
-                        /* Convert the new file created to uri to play it in videoView using setVideoContainer() */
-                            /*uri = Uri.fromFile(new File(cutVideoName));
-                            setVideoContainer();*/
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(createdStoryPath));
+                            intent.setDataAndType(Uri.parse(createdStoryPath), "video/mp4");
+                            startActivity(intent);
+
                         }
                     }
                 });
@@ -384,10 +350,10 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                 e.printStackTrace();
                 num_of_commands_completed = 0;
                 progressDialog.dismiss();
-                Toast.makeText(this, "FFMPEG Already running", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "xxxFFMPEG Already running", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "FFMPEG not loaded", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "xxxFFMPEG not loaded", Toast.LENGTH_SHORT).show();
         }
     }
 

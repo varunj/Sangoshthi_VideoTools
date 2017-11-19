@@ -4,7 +4,9 @@ import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -130,9 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_edit_story:
-                Toast.makeText(this, "Edit Story", Toast.LENGTH_SHORT).show();
-                Intent intentEditStory = new Intent(this, EditStory.class);
-                startActivity(intentEditStory);
+                Toast.makeText(this, "Check Sangoshthi Folder", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

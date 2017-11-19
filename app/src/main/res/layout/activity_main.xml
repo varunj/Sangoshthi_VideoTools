@@ -8,30 +8,38 @@
     android:gravity="center"
     tools:context="io.github.varunj.sangoshthi_videotools.activities.MainActivity">
 
-    <Button
-        android:id="@+id/btn_create_story"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_create_story"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:background="@color/colorButton"
-        android:layout_margin="10dp"
-        android:width="250dp"
-        android:height="80dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_edit_story"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_edit_story"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:background="@color/colorButton"
-        android:layout_margin="10dp"
-        android:width="250dp"
-        android:height="80dp"/>
+        <Button
+            android:id="@+id/btn_create_story"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="CREATE NEW STORY"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:background="@color/home_button1"
+            android:drawableLeft="@drawable/picker_add_video"
+            android:layout_weight="1.0"
+            android:paddingLeft="15dp"/>
+
+        <Button
+            android:id="@+id/btn_edit_story"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="BROWSE STORIES"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:background="@color/home_button2"
+            android:drawableLeft="@drawable/picker_gallery"
+            android:layout_weight="1.0"
+            android:paddingLeft="15dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

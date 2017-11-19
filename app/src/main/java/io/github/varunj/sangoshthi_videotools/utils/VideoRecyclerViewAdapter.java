@@ -59,26 +59,32 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-                // for for images
-                intent.setType("image/jpeg");
-
-                // for both images and videos
-                //intent.setType("*/*");
-                /* String[] mimetypes = {"image/jpeg", "video/mp4"};
-                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimetypes); */
+                // for for all
+                intent.setType("*/*");
 
                 Constants.update_position = holder.getAdapterPosition();
                 context.startActivityForResult(intent, Constants.VIDEO_READ_REQUEST_CODE);
             }
         });
 
+
         if(!imageUriList.get(position).equals("")) {
-            holder.ivContainer.setVisibility(View.VISIBLE);
-            Picasso.with(context)
-                    .load(imageUriList.get(position))
-                    .resize(148, 98)
-                    .centerCrop()
-                    .into(holder.ivContainer);
+            if (imageUriList.get(position).contains("mp4")) {
+                holder.ivContainer.setVisibility(View.VISIBLE);
+                Picasso.with(context)
+                        .load(imageUriList.get(position).replace("mp4", "png"))
+                        .resize(148, 98)
+                        .centerCrop()
+                        .into(holder.ivContainer);
+            }
+            else {
+                holder.ivContainer.setVisibility(View.VISIBLE);
+                Picasso.with(context)
+                        .load(imageUriList.get(position))
+                        .resize(148, 98)
+                        .centerCrop()
+                        .into(holder.ivContainer);
+            }
         } else {
             holder.ivContainer.setVisibility(View.GONE);
         }
