@@ -24,6 +24,10 @@
         </activity>
         <activity android:name=".activities.CreateStory"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activities.TrimVideo"
+            android:screenOrientation="portrait"/>
     </application>
+
+
 
 </manifest>

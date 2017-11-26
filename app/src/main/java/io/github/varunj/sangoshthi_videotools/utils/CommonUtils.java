@@ -79,7 +79,7 @@ public class CommonUtils {
     public String checkDirectory() {
         File directoryFile = Environment.getExternalStorageDirectory();
         if(directoryFile != null) {
-            File folder = new File(directoryFile + File.separator + "VideoEditor");
+            File folder = new File(directoryFile + File.separator + "Android/data/com.dropbox.android/files/u713122961/scratch/Sangoshthi Team Folder/Sangoshthi_VideoTools/StitchedVideos");
             if(folder.exists() && folder.isDirectory()) {
                 return folder.getAbsolutePath();
             } else {

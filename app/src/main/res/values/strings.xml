@@ -27,4 +27,6 @@
     <string name="cd_iv_film_roll">Film Roll</string>
     <string name="cd_iv_container">Container</string>
 
+    <string name="dropbox_path">Android/data/com.dropbox.android/files/u713122961/scratch/Sangoshthi Team Folder/Sangoshthi_VideoTools/StitchedVideos</string>
+
 </resources>

@@ -53,7 +53,7 @@ public class AudioRecyclerViewAdapter extends RecyclerView.Adapter<AudioRecycler
             @Override
             public void onClick(View view) {
                 // load audio by starting fileManager intent
-                Toast.makeText(context, "Load Audio" + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Load Audio" + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);

@@ -1,4 +1,4 @@
-package in.deepaksood.videocutntrim.activities;
+package io.github.varunj.sangoshthi_videotools.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -23,19 +23,19 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunnin
 import java.io.File;
 import java.util.Arrays;
 
-import in.deepaksood.videocutntrim.R;
-import in.deepaksood.videocutntrim.utils.CommonUtils;
-import in.deepaksood.videocutntrim.utils.Constants;
+import io.github.varunj.sangoshthi_videotools.R;
+import io.github.varunj.sangoshthi_videotools.utils.CommonUtils;
+import io.github.varunj.sangoshthi_videotools.utils.Constants;
 
 /**
  * EditStory where all the processing is happening
  * Layout - activity_edit_storydit_story.xml
  * @author deepak
  */
-public class EditStory extends AppCompatActivity {
+public class TrimVideo extends AppCompatActivity {
 
     // TAG for logging
-    private static final String TAG = EditStory.class.getSimpleName();
+    private static final String TAG = TrimVideo.class.getSimpleName();
 
     // linear layout hosts both the seek bar and the timer TextView associated with it
     private LinearLayout llCutController;
@@ -103,7 +103,6 @@ public class EditStory extends AppCompatActivity {
             btnBrowse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "browse button clicked");
                     Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
                     intent.setType("video/mp4");
@@ -118,7 +117,7 @@ public class EditStory extends AppCompatActivity {
                         cutVideo(cutStartTimeSeconds, cutEndTimeSeconds);
 
                     } else {
-                        Toast.makeText(EditStory.this, "please select a video first", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TrimVideo.this, "please select a video first", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -135,7 +134,7 @@ public class EditStory extends AppCompatActivity {
 
             Toast.makeText(this, "Playing video", Toast.LENGTH_SHORT).show();
             String playStoryUri = getIntent().getStringExtra(Constants.STORY_URI);
-            Log.d(TAG, "playStoryUri: " + playStoryUri);
+            Log.d(TAG, "xxxplayStoryUri: " + playStoryUri);
             if(playStoryUri != null && !playStoryUri.equals("")) {
                 uri = Uri.parse(playStoryUri);
                 Log.i(TAG, "Uri: " + uri.toString());
@@ -220,13 +219,13 @@ public class EditStory extends AppCompatActivity {
 
     private void cutVideo(int cutStartTimeSeconds, int cutEndTimeSeconds) {
 
-        String videoLocation = CommonUtils.getInstance().getPath(EditStory.this, uri);
+        String videoLocation = CommonUtils.getInstance().getPath(TrimVideo.this, uri);
 
         // ex - /storage/emulated/0/VideoEditor/videoplayback.mp4
         if(videoLocation != null) {
             String[] splitted = videoLocation.split("/");
             uploadVideoName = splitted[splitted.length-1];
-            Log.d(TAG,"UploadVideoName: "+uploadVideoName);
+            Log.d(TAG,"xxxUploadVideoName: "+uploadVideoName);
         }
 
         if(getSaveDirectory()) {
@@ -235,41 +234,23 @@ public class EditStory extends AppCompatActivity {
             temp1Location = Constants.directoryPath + File.separator + "intermediate1.ts";
             temp2Location = Constants.directoryPath + File.separator + "intermediate2.ts";
 
-            Log.d(TAG, "video start time: " + 0);
-            Log.d(TAG, "video end time: " + videoDurationSeconds);
-            Log.d(TAG, "cutStartTimeSeconds: " + cutStartTimeSeconds);
-            Log.d(TAG, "cutEndTimeSeconds: " + cutEndTimeSeconds);
-            Log.d(TAG, "uri: " + uri);
-            Log.d(TAG, "videoLocation: " + videoLocation);
-            Log.d(TAG, "cutVideoName: " + cutVideoName);
+            Log.d(TAG, "xxxvideo start time: " + 0);
+            Log.d(TAG, "xxxvideo end time: " + videoDurationSeconds);
+            Log.d(TAG, "xxxcutStartTimeSeconds: " + cutStartTimeSeconds);
+            Log.d(TAG, "xxxcutEndTimeSeconds: " + cutEndTimeSeconds);
+            Log.d(TAG, "xxxuri: " + uri);
+            Log.d(TAG, "xxxvideoLocation: " + videoLocation);
+            Log.d(TAG, "xxcutVideoName: " + cutVideoName);
 
-            max_num_of_commands = 5;
+            max_num_of_commands = 1;
             num_of_commands_completed = 0;
 
             // ffmpeg -y -ss 0 -i videoplayback.mp4 -t 20 -c copy cut1.mp4
-            String[] cmd_cut_1 = {"-y" ,"-ss", "0", "-i", videoLocation, "-t", "" + cutStartTimeSeconds, "-c", "copy", cut1Location};
-            Log.d(TAG, "cmd_cut_1: " + Arrays.toString(cmd_cut_1));
+            String[] cmd_cut_1 = {"-y" , "-i", videoLocation,"-ss", ""+cutStartTimeSeconds, "-to", ""+cutEndTimeSeconds, "-c", "copy", cutVideoName};
+            Log.d(TAG, "xxxcmd_cut_1: " + Arrays.toString(cmd_cut_1));
             execFFmpegBinary(cmd_cut_1);
 
-            // ffmpeg -y -ss 40 -i videoplayback.mp4 -t 235 -c copy cut2.mp4
-            String[] cmd_cut_2 = {"-y", "-ss", "" + cutEndTimeSeconds, "-i", videoLocation, "-t", "" + videoDurationSeconds, "-c", "copy", cut2Location};
-            Log.d(TAG, "cmd_cut_2: " + Arrays.toString(cmd_cut_2));
-            execFFmpegBinary(cmd_cut_2);
 
-            // ffmpeg -y -i cut1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate1.ts
-            String[] cmd_convert_1 = {"-y", "-i", cut1Location, "-c", "copy", "-bsf:v", "h264_mp4toannexb", "-f", "mpegts", temp1Location};
-            Log.d(TAG, "cmd_convert_1: " + Arrays.toString(cmd_convert_1));
-            execFFmpegBinary(cmd_convert_1);
-
-            // ffmpeg -y -i cut2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts intermediate2.ts
-            String[] cmd_convert_2 = {"-y", "-i", cut2Location, "-c", "copy", "-bsf:v", "h264_mp4toannexb", "-f", "mpegts", temp2Location};
-            Log.d(TAG, "cmd_convert_2: " + Arrays.toString(cmd_convert_2));
-            execFFmpegBinary(cmd_convert_2);
-
-            // ffmpeg -y -i "concat:intermediate1.ts|intermediate2.ts" -c copy -bsf:a aac_adtstoasc final.mp4
-            String[] cmd_join = {"-y", "-i", "concat:"+temp1Location+"|"+temp2Location, "-c", "copy", "-bsf:a", "aac_adtstoasc", cutVideoName};
-            Log.d(TAG, "cmd_join: " + Arrays.toString(cmd_join));
-            execFFmpegBinary(cmd_join);
         } else {
             Toast.makeText(this, "VideoName not fetched", Toast.LENGTH_SHORT).show();
         }
@@ -295,12 +276,12 @@ public class EditStory extends AppCompatActivity {
                 CommonUtils.getInstance().ffmpeg.execute(command, new ExecuteBinaryResponseHandler() {
                     @Override
                     public void onFailure(String s) {
-                        Log.d(TAG, "FAILED with output : " + s);
+                        Log.d(TAG, "xxxFAILED with output : " + s);
                     }
 
                     @Override
                     public void onSuccess(String s) {
-                        Log.d(TAG, "SUCCESS with output : " + s);
+                        Log.d(TAG, "xxxSUCCESS with output : " + s);
 
                     }
 
@@ -311,7 +292,7 @@ public class EditStory extends AppCompatActivity {
 
                     @Override
                     public void onStart() {
-                        Log.d(TAG, "Started command");
+                        Log.d(TAG, "xxxStarted command");
                         progressDialog.setMessage("Processing...");
                         progressDialog.show();
                     }
@@ -319,14 +300,14 @@ public class EditStory extends AppCompatActivity {
                     @Override
                     public void onFinish() {
                         num_of_commands_completed++;
-                        Log.d(TAG, "Finished command");
+                        Log.d(TAG, "xxxFinished command");
                         // progress dialog must be removed when all the commands are completed
                         if(num_of_commands_completed == max_num_of_commands) {
-                            Log.d(TAG, "All commands processed");
+                            Log.d(TAG, "xxxAll commands processed");
                             progressDialog.dismiss();
 
                             // All the intermediate file must be deleted, for next round of cutting
-                            Log.d(TAG, "Deleting file in progress");
+                            Log.d(TAG, "xxxDeleting file in progress");
                             File file = new File(cut1Location);
                             if(file.exists()) {
                                 Log.d(TAG, ""+file.delete());

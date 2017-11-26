@@ -132,7 +132,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_edit_story:
-                Toast.makeText(this, "Check Sangoshthi Folder", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Trim Videos", Toast.LENGTH_SHORT).show();
+                Intent intentTrimVideos = new Intent(this, TrimVideo.class);
+                startActivity(intentTrimVideos);
                 break;
         }
     }

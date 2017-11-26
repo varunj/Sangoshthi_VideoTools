@@ -147,7 +147,7 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_add_container:
-                Toast.makeText(this, "Add Section", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Add Section", Toast.LENGTH_SHORT).show();
                 Constants.imageUriList.add("");
                 Constants.audioUriList.add("");
                 videoRecyclerViewAdapter.notifyItemInserted(Constants.imageUriList.size() - 1);
@@ -158,7 +158,7 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
 
             case R.id.btn_delete_container:
                 if(Constants.imageUriList.size() != 0) {
-                    Toast.makeText(this, "Delete Section", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Delete Section", Toast.LENGTH_SHORT).show();
                     Constants.imageUriList.remove(Constants.imageUriList.size() - 1);
                     Constants.audioUriList.remove(Constants.audioUriList.size() - 1);
                     videoRecyclerViewAdapter.notifyDataSetChanged();
@@ -210,18 +210,16 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                     String[] merge_command = {"-loop", "1", "-y",
                             "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.imageUriList.get(i))),
                             "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.audioUriList.get(i))),
-                            "-acodec", "aac",
-                            "-vcodec", "mpeg4",
                             "-shortest", intermediateFilePath};
+//                    "-acodec", "aac", "-vcodec", "mpeg4",
                     Log.d(TAG, "xxxmerge_command: " + Arrays.toString(merge_command));
                     execFFmpegBinary(merge_command);
                 }
                 else {
                     String[] merge_command = {
                             "-i", CommonUtils.getInstance().getPath(this, Uri.parse(Constants.imageUriList.get(i))),
-                            "-acodec", "aac",
-                            "-vcodec", "mpeg4",
                             intermediateFilePath};
+//                    "-acodec", "aac", "-vcodec", "mpeg4",
                     Log.d(TAG, "xxxmerge_command: " + Arrays.toString(merge_command));
                     execFFmpegBinary(merge_command);
                 }
@@ -242,8 +240,10 @@ public class CreateStory extends AppCompatActivity implements View.OnClickListen
                     + CommonUtils.getInstance().getTimeStamp()
                     + ".mp4";
 
+//            String[] join_command = {"-i", concat_command,
+//                        "-c", "copy", "-bsf:a", "aac_adtstoasc", createdStoryPath};
             String[] join_command = {"-i", concat_command,
-                        "-c", "copy", "-bsf:a", "aac_adtstoasc", createdStoryPath};
+                    "-c", "copy", createdStoryPath};
 
             execFFmpegBinary(join_command);
 

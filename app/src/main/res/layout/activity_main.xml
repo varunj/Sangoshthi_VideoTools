@@ -31,7 +31,7 @@
             android:id="@+id/btn_edit_story"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="BROWSE STORIES"
+            android:text="TRIM VIDEOS"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:textSize="30sp"

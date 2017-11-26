@@ -54,7 +54,7 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
             public void onClick(View view) {
 
                 // load image by starting fileManager intent
-                Toast.makeText(context, "Load Image" + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Load Image" + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
